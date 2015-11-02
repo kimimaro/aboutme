@@ -28,14 +28,13 @@ if env == "production"
   # Help ensure your application will always spawn in the symlinked
   # "current" directory that Capistrano sets up.
   
-  working_directory "#{app_dir}/current" # "/var/www/projects/current"
+  working_directory "#{app_dir}/current"
 
   # feel free to point this anywhere accessible on the filesystem
   user 'deploy', 'deploy'
-  shared_path = "#{app_dir}/shared"
 
-  stderr_path "#{shared_path}/log/unicorn.stderr.log"
-  stdout_path "#{shared_path}/log/unicorn.stdout.log"
+  stderr_path "#{working_directory}/log/unicorn.stderr.log"
+  stdout_path "#{working_directory}/log/unicorn.stdout.log"
 end
 
 before_fork do |server, worker|
