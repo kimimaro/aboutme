@@ -4,6 +4,8 @@ lock '3.1.0'
 # to get 'sh' command works
 include Rake::DSL
 
+require 'mixlib/shellout'
+
 set :application, 'aboutme'
 set :repo_url, 'git@github.com:kimimaro/aboutme.git'
 
@@ -55,11 +57,16 @@ set :linked_dirs, %w{bin log bundle tmp/pids tmp/cache tmp/sockets vendor/bundle
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+def run_and_message(command, opts = {})
+  sh = Mixlib::ShellOut.new(command, opts)
+  sh.run_command
+  puts status_message(command, sh.exitstatus)
+end
+
  namespace :unicorn do
 
    set :unicorn_binary, "/home/deploy/.rbenv/shims/bundle exec unicorn"
    set :unicorn_config, -> { current_path.join('config/unicorn.rb') }
-
    set :unicorn_pid, -> { shared_path.join("tmp/pids/unicorn.#{fetch(:application)}.pid") } 
 
    desc 'Debug Unicorn variables'
@@ -75,6 +82,12 @@ set :linked_dirs, %w{bin log bundle tmp/pids tmp/cache tmp/sockets vendor/bundle
      end
    end
 
+   task :setup do
+     on roles(:app), in: :sequence, wait: 5 do
+       # execute "touch #{fetch(:unicorn_pid)}"
+     end
+   end
+
    desc 'start unicorn'
    task :start do
      on roles(:app), in: :sequence, wait: 5 do
@@ -84,19 +97,21 @@ set :linked_dirs, %w{bin log bundle tmp/pids tmp/cache tmp/sockets vendor/bundle
 
    task :stop do
      on roles(:app), in: :sequence, wait: 5 do
-       execute "kill `cat #{fetch(:unicorn_pid)}`"
+       # execute "kill `cat #{fetch(:unicorn_pid)}`"
+       # if test ! -d /home/deploy/apps/aboutme/releases/20151101040702; then echo "Directory does not exist '/home/deploy/apps/aboutme/releases/20151101040702'" 1>&2; false; fi
+       execute "if test -s #{fetch(:unicorn_pid)}; then kill `cat #{fetch(:unicorn_pid)}`; fi"
      end
    end
 
    task :graceful_stop do
      on roles(:app), in: :sequence, wait: 5 do
-       run "kill -s QUIT `cat #{fetch(:unicorn_pid)}`"
+       execute "if test -s #{fetch(:unicorn_pid)}; then kill -s QUIT `cat #{fetch(:unicorn_pid)}`; fi"
      end
    end
 
    task :reload do
      on roles(:app), in: :sequence, wait: 5 do
-       run "kill -s USR2 `cat #{fetch(:unicorn_pid)}`"
+       execute "if test -s #{fetch(:unicorn_pid)}; then kill -s USR2 `cat #{fetch(:unicorn_pid)}`; fi"
      end
    end
 
@@ -139,6 +154,8 @@ set :linked_dirs, %w{bin log bundle tmp/pids tmp/cache tmp/sockets vendor/bundle
        execute "mkdir -p #{shared_path}/config"
 
        sh "scp config/database.yml deploy@oneboxapp.com:#{shared_path}/config/database.yml"
+
+       invoke "unicorn:setup"
      end
    end
 
@@ -157,5 +174,4 @@ set :linked_dirs, %w{bin log bundle tmp/pids tmp/cache tmp/sockets vendor/bundle
        # end
      end
    end
-
  end
