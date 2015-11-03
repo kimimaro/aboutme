@@ -1,8 +1,13 @@
 Aboutme::Application.routes.draw do
   
+  get '/:locale' => 'aboutme#index'
   root "aboutme#index"
 
-  get "aboutme/index"
+  scope "/:locale", locale: /en|cn/ do
+    # resources :books
+    get "aboutme/index"
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

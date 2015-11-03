@@ -11,7 +11,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#page-top">Start Bootstrap</a>
+                <a class="navbar-brand" href="#page-top"><%=t 'locate_username', last_name: t(:last_name), first_name: t(:first_name) %></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -21,13 +21,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
+                        <a href="#portfolio"><%=t :my_projects %></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#about">About</a>
+                        <a href="#about">关于我</a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#contact">Contact</a>
+                        <a href="#contact">联系我</a>
                     </li>
                 </ul>
             </div>
@@ -44,9 +44,9 @@
                     <%= image_tag "profile.png" %>
                     <!-- <img class="img-responsive" src="img/profile.png" alt=""> -->
                     <div class="intro-text">
-                        <span class="name">Start Bootstrap</span>
+                        <span class="name">Kimi Yu</span>
                         <hr class="star-light">
-                        <span class="skills">Web Developer - Graphic Artist - User Experience Designer</span>
+                        <span class="skills">@kimirius - Baidu - iOS Developer</span>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
+                    <h2>我的项目</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -133,20 +133,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>About</h2>
+                    <h2>嗨, 我是于天航</h2>
                     <hr class="star-light">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
-                    <p>Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.</p>
+                    <p>一名来自中国的iOS开发者。现就职于百度。</p>
                 </div>
                 <div class="col-lg-4">
-                    <p>Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!</p>
+                    <p>其疾如风，其徐如林，侵略如火，不动如山。</p>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
+                        <i class="fa fa-download"></i> 欢迎访问我的博客
                     </a>
                 </div>
             </div>
@@ -158,7 +158,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Contact Me</h2>
+                    <h2>和我联系</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -278,22 +278,23 @@
                             <h2>Project Title</h2>
                             <hr class="star-primary">
                             <%= image_tag "portfolio/cabin.png", class: "img-responsive img-centered" %>
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
+                            <p>- 灵活高效的生活计划制定应用 - 简单好用的待办事项备忘应用 <a href="https://itunes.apple.com/br/app/yi-tian-ai-ji-hua-ai-ji-lu/id573096972?mt=8">the preview page</a>. 此应用由 <a href="http://about.402v.com/">Kimi Yu</a> 开发
+                            一天，专注提高每日生活效率！</p>
                             <ul class="list-inline item-details">
                                 <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
+                                    <strong><a href="https://itunes.apple.com/br/app/yi-tian-ai-ji-hua-ai-ji-lu/id573096972?mt=8">前往下载</a>
                                     </strong>
                                 </li>
                                 <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    <strong><a href="">April 2014</a>
                                     </strong>
                                 </li>
                                 <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
+                                    <strong><a href="">iOS Development</a>
                                     </strong>
                                 </li>
                             </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> 关闭</button>
                         </div>
                     </div>
                 </div>
@@ -475,7 +476,7 @@
                                     </strong>
                                 </li>
                                 <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
+                                    <strong><a href="http://startbootstrap.com"><%= l Date.current, format: :short %></a>
                                     </strong>
                                 </li>
                                 <li>Service:

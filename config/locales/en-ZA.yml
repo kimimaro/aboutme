@@ -1,14 +1,5 @@
 ---
-en:
-  hello: "hello world"
-  my_projects: PORTFOLIO
-  first_name: Kimi
-  last_name: Yu
-  
-  #format
-  locate_username: "%{last_name}%{first_name}"
-  
-  # utils
+en-ZA:
   date:
     abbr_day_names:
     - Sun
@@ -161,7 +152,7 @@ en:
         separator: "."
         significant: false
         strip_insignificant_zeros: false
-        unit: "$"
+        unit: R
     format:
       delimiter: ","
       precision: 3
